@@ -1,0 +1,23 @@
+###################### server info #####################
+server:
+  port: 11111
+  ssl:
+    enabled: false
+  error:
+    whitelabel:
+      enabled: false
+###################### spring设置 ###########################
+spring:
+  application:
+    name: 填写你的服务名称
+###################### apollo ###########################
+app:
+  id: ${spring.application.name}
+apollo:
+  meta: http://192.168.20.222:8080
+  bootstrap:
+    enabled: true
+    eagerLoad:
+      enabled: true
+    namespaces: application,test.public.conf # application,dev.public.conf  #开发环境配置  application,test.public.conf #测试环境配置
+

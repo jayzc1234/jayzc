@@ -1,0 +1,56 @@
+###################### server info #####################
+server:
+  namesrvAddr: rocketmq:9876
+swagger2:
+  enable: 1
+
+#################### rocketMQ ###########################
+hydra-test:
+  rocketmq:
+    producer:
+      # 发送同一类消息的设置为同一个group，保证唯一,默认不需要设置，rocketmq会使用ip@pid(pid代表jvm名字)作为唯一标示
+      groupName: A-TO-BILL
+      #mq的nameserver地址
+      namesrvAddr: ${server.namesrvAddr}
+      #如果需要同一个jvm中不同的producer往不同的mq集群发送消息，需要设置不同的instanceName
+      instanceName: A-TO-BILL
+      #topic名称
+      topic: A-TO-BILL
+      #根据实际情况设置消息的tag
+      tag: A-TO-BILL
+      #消息最大长度
+      maxMessageSize: 10485760 # 1024*128
+      #发送消息超时时间
+      sendMsgTimeout: 10000
+      #发送消息线程池数
+      sendMessageThreadPoolNums: 128 #large thread numbers
+      #发送消息是否使用可重入锁
+      useReentrantLockWhenPutMessage: true
+
+hydra-example:
+  rocketmq:
+    producer:
+      # 发送同一类消息的设置为同一个group，保证唯一,默认不需要设置，rocketmq会使用ip@pid(pid代表jvm名字)作为唯一标示
+      groupName: A-TO-EXAMPLE
+      #mq的nameserver地址
+      namesrvAddr: ${server.namesrvAddr}
+      #如果需要同一个jvm中不同的producer往不同的mq集群发送消息，需要设置不同的instanceName
+      instanceName: A-TO-EXAMPLE
+      #topic名称
+      topic: A-TO-EXAMPLE
+      #根据实际情况设置消息的tag
+      tag: A-TO-EXAMPLE
+      #消息最大长度
+      maxMessageSize: 10485760 # 1024*128
+      #发送消息超时时间
+      sendMsgTimeout: 10000
+      #发送消息线程池数
+      sendMessageThreadPoolNums: 128 #large thread numbers
+      #发送消息是否使用可重入锁
+      useReentrantLockWhenPutMessage: true
+    consumer:
+      namesrvAddr: ${server.namesrvAddr}
+      groupName: A-TO-B
+      topic: A-TO-B
+      consumeThreadMin: 20
+      consumeThreadMax: 64
